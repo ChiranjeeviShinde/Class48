@@ -6,7 +6,8 @@ var ghost1,ghost2,ghost3,ghost4;
 var ghost1Img,ghost2Img,ghost3Img,ghost4Img;
 var box1,box2,box3,box4,box5,exit;
 var pb1,pb2,pb3,pb4,ab1,ab2,ab3,ab4,cb1,cb2,cb3,cb4;
-var hb,mb;
+var hb,mb,Ab,nb;
+var ob1,ob2,ob3,ob4,ob5,ob6,ob7,ob8,ob9;
 
 function preload(){
   aImg = loadImage("alphabets/a2.png");
@@ -17,7 +18,7 @@ function preload(){
   lineImg = loadImage("line.jfif");
   line1Img = loadImage("line2.jpg");
   line2Img = loadImage("line3.jpg");
-  pacmanImg = loadImage("pacmanRight/pacman-0.png");
+  pacmanImg = loadImage("pacmanUp/pacman-1.png");
   pacmanImgRight = loadAnimation("pacmanRight/pacman-1.png","pacmanRight/pacman-2.png","pacmanRight/pacman-3.png","pacmanRight/pacman-0.png");
   pacmanImgLeft = loadAnimation("pacmanLeft/pacman-1.jpg","pacmanLeft/pacman-2.jpg","pacmanLeft/pacman-3.jpg","pacmanLeft/pacman-0.jpg");
   pacmanImgUp = loadAnimation("pacmanUp/pacman-1.png","pacmanUp/pacman-2.png","pacmanUp/pacman-3.png","pacmanUp/pacman-0.png");
@@ -100,13 +101,17 @@ function setup() {
   A1 = createSprite(1050,235,10,100)
   A1.addImage(aImg);
   A1.scale = 0.3;
+  Ab = createSprite(1050,235,140,150)
+  Ab.visible = false;
 
   //letter N
   n1 = createSprite(1250,235,10,100);
   n1.addImage(nImg);
+  nb = createSprite(1250,235,145,155)
+  nb.visible = false;
 
   //pacman
-  pacman = createSprite(100,100,20,20);
+  pacman = createSprite(260,500,20,20);
   pacman.addImage("eating",pacmanImg);
   pacman.scale = 0.2;
 
@@ -143,14 +148,36 @@ function setup() {
   box5.shapeColor = "yellow";
   exit = createSprite(1220,440,100,10);
   exit.shapeColor = "cyan";
+
+  //objects
+  ob1 = createSprite(170,515,15,100);
+  ob1.shapeColor = "yellow";
+  ob2 = createSprite(350,515,15,100);
+  ob2.shapeColor = "yellow";
+  ob3 = createSprite(140,100,70,15);
+  ob3.shapeColor = "white";
+  ob4 = createSprite(660,100,300,15);
+  ob4.shapeColor = "white";
+  ob5 = createSprite(1080,100,100,15);
+  ob5.shapeColor = "white";
+  ob6 = createSprite(1300,100,70,15);
+  ob6.shapeColor = "white";
+  ob7 = createSprite(100,405,70,15);
+  ob7.shapeColor = "white";
+  ob8 = createSprite(370,405,150,15);
+  ob8.shapeColor = "white";
+  ob9 = createSprite(845,405,100,15);
+  ob9.shapeColor = "white";
+  
+
 }
 
 function draw() {
-  background(255); 
+  background(0); 
 
   textSize(20);
-  fill(0);
-  text(mouseX + "," + mouseY,100,100);
+  fill(255);
+  text(mouseX + "," + mouseY,700,500);
 
   //pacman controls
   if(keyIsDown(RIGHT_ARROW)){
@@ -194,9 +221,32 @@ function draw() {
     pacman.collide(cb4);
   }
 
-  if(pacman.isTouching(hb)||pacman.isTouching(mb)){
+  if(pacman.isTouching(hb)||pacman.isTouching(mb)||pacman.isTouching(Ab)||pacman.isTouching(nb)){
     pacman.collide(hb); 
     pacman.collide(mb);
+    pacman.collide(Ab);
+    pacman.collide(nb);
+  }
+
+  if(pacman.isTouching(box1)||pacman.isTouching(box2)||pacman.isTouching(box3)||pacman.isTouching(box4)||pacman.isTouching(box5)||pacman.isTouching(exit)){
+    pacman.collide(box1);
+    pacman.collide(box2);
+    pacman.collide(box3);
+    pacman.collide(box4);
+    pacman.collide(box5);
+    pacman.collide(exit);
+  }
+  
+  if(pacman.isTouching(ob1)||pacman.isTouching(ob2)||pacman.isTouching(ob3)||pacman.isTouching(ob4)||pacman.isTouching(ob5)||pacman.isTouching(ob6)||pacman.isTouching(ob7)||pacman.isTouching(ob8)||pacman.isTouching(ob9)){
+    pacman.collide(ob1);
+    pacman.collide(ob2);
+    pacman.collide(ob3);
+    pacman.collide(ob4);
+    pacman.collide(ob5);
+    pacman.collide(ob6);
+    pacman.collide(ob7);
+    pacman.collide(ob8);
+    pacman.collide(ob9);
   }
 
   drawSprites();
